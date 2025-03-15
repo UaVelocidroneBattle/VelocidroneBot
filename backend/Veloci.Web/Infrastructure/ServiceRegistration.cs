@@ -26,6 +26,7 @@ public static class ServiceRegistration
         services.AddTransient<ITrackFetcher, ApiTrackFetcher>();
         services.AddTransient<TrackService>();
         services.AddTransient<PilotResultsCalculator>();
+        services.AddTransient<AchievementService>();
 
         return services;
     }

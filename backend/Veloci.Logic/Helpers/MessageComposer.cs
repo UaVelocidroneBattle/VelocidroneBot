@@ -57,10 +57,11 @@ public class MessageComposer
         return "😔 Бачу трек не сподобався. Більше його не буде";
     }
 
-    public string TempLeaderboard(List<CompetitionResults> results)
+    public string TempLeaderboard(List<CompetitionResults> results, Track track)
     {
         var rows = TempLeaderboardRows(results);
-        return $"🧐 Проміжні результати:{Environment.NewLine}{Environment.NewLine}" +
+        return $"🧐 Проміжні результати:{Environment.NewLine}" +
+               $"*{track.Map.Name} - `{track.Name}`*{Environment.NewLine}{Environment.NewLine}" +
                $"`{string.Join($"{Environment.NewLine}", rows)}`";
     }
 
@@ -178,7 +179,7 @@ public class MessageComposer
     {
         var timeChangePart = delta.TimeChange.HasValue ? $" ({MsToSec(delta.TimeChange.Value)}s)" : string.Empty;
         var rankOldPart = delta.RankOld.HasValue ? $" (#{delta.RankOld})" : string.Empty;
-        var modelPart = delta.DroneModel is not null ? $" / {delta.DroneModel.Name}" : string.Empty;
+        var modelPart = delta.ModelName is not null ? $" / {delta.ModelName}" : string.Empty;
 
         return $"🎮 *{delta.PlayerName}*{modelPart}{Environment.NewLine}" +
                $"⏱️ {MsToSec(delta.TrackTime)}s{timeChangePart} / #{delta.Rank}{rankOldPart}";

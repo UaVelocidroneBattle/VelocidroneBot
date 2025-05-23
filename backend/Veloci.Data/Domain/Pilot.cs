@@ -24,6 +24,7 @@ public class Pilot
     public DateTime? LastRaceDate { get; set; }
     public int DayStreak { get; set; }
     public int MaxDayStreak { get; set; }
+    public virtual ICollection<PilotAchievement> Achievements { get; set; }
 
     public void IncreaseDayStreak(DateTime today)
     {
@@ -41,6 +42,11 @@ public class Pilot
     public void ResetDayStreak()
     {
         DayStreak = 0;
+    }
+
+    public bool HasAchievement(string achievementName)
+    {
+        return Achievements.Any(achievement => achievement.Name == achievementName);
     }
 }
 
